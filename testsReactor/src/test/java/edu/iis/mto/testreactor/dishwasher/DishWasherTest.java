@@ -79,6 +79,22 @@ public class DishWasherTest {
         assertEquals(runResult.getRunMinutes(), 120);
     }
 
+    @Test
+    public void dishWasherStartShouldReturnSuccessWithCorrectValuesGiven() {
+        Door door = mock(Door.class);
+        Engine engine = mock(Engine.class);
+        DirtFilter dirtFilter = mock(DirtFilter.class);
+        WaterPump waterPump = mock(WaterPump.class);
+
+        when(door.closed()).thenReturn(false);
+        when(dirtFilter.capacity()).thenReturn(60.0d);
+
+        DishWasher dishWasher = new DishWasher(waterPump, engine, dirtFilter, door);
+        ProgramConfiguration program = ProgramConfiguration.builder().withProgram(WashingProgram.ECO).withTabletsUsed(true).build();
+        RunResult result = dishWasher.start(program);
+        RunResult expectedResult = RunResult.builder().withStatus(Status.SUCCESS).build();
+        assertEquals(result.getStatus(), expectedResult.getStatus());
+    }
 
 
 
