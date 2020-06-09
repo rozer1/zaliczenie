@@ -63,5 +63,22 @@ public class DishWasherTest {
         verify(engine, times(1)).runProgram(program.getProgram());
     }
 
+    @Test
+    public void whenWashingProgramIsIntensiveTimeOfWashingShouldBe120() {
+        Door door = mock(Door.class);
+        Engine engine = mock(Engine.class);
+        DirtFilter dirtFilter = mock(DirtFilter.class);
+        WaterPump waterPump = mock(WaterPump.class);
+
+        when(door.closed()).thenReturn(true);
+        when(dirtFilter.capacity()).thenReturn(60.0d);
+
+        DishWasher dishWasher = new DishWasher(waterPump, engine, dirtFilter, door);
+        ProgramConfiguration program = ProgramConfiguration.builder().withProgram(WashingProgram.INTENSIVE).withTabletsUsed(true).withFillLevel(FillLevel.HALF).build();
+        RunResult runResult = dishWasher.start(program);
+        assertEquals(runResult.getRunMinutes(), 120);
+    }
+
+
 
 }
