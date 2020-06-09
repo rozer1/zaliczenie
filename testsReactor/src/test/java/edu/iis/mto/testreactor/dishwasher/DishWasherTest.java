@@ -13,6 +13,22 @@ import static org.mockito.Mockito.*;
 
 public class DishWasherTest {
 
+    private Door door;
+
+    private DirtFilter dirtFilter;
+
+    private Engine engine;
+
+    private WaterPump waterPump;
+
+    @Before
+    public void setUp() {
+        door = mock(Door.class);
+        dirtFilter = mock(DirtFilter.class);
+        engine = mock(Engine.class);
+        waterPump = mock(WaterPump.class);
+    }
+
     @Test
     public void withDoorOpenDishWasherShouldReturnStatus() {
         Door door = mock(Door.class);
