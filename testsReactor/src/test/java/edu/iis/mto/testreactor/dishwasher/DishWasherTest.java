@@ -31,7 +31,7 @@ public class DishWasherTest {
     }
 
     @Test
-    public void dishWasherStartShouldReturnSuccessWithCorrectValuesGiven() {
+    public void dishWasherStartShouldReturnErrorFilterIfFilterIsNotClean() {
         Door door = mock(Door.class);
         DirtFilter dirtFilter = mock(DirtFilter.class);
         Engine engine = mock(Engine.class);
@@ -78,6 +78,7 @@ public class DishWasherTest {
         RunResult runResult = dishWasher.start(program);
         assertEquals(runResult.getRunMinutes(), 120);
     }
+
 
 
 
